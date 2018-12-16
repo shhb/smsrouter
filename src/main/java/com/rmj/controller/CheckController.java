@@ -15,9 +15,17 @@ import com.twilio.type.PhoneNumber;
 public class CheckController {
  
 
+	 @RequestMapping(value = "/status/", method = RequestMethod.GET) 
+	    public @ResponseBody String getStatus() {
+	    	try {
+	     		   return "Hello World";
+	 		  } catch (Exception e) {
+	 		   	   return "Error" ;
+	 		  }
+	    }
 
     @RequestMapping(value = "/sendmsg/{sid}/{token}/{number}", method = RequestMethod.GET) 
-    public @ResponseBody String getStatus(@PathVariable String sid, @PathVariable String token, @PathVariable String number) {
+    public @ResponseBody String sendsms(@PathVariable String sid, @PathVariable String token, @PathVariable String number) {
     	try {
     		Twilio.init(sid, token);
     		Message message = Message.creator(
@@ -25,7 +33,7 @@ public class CheckController {
     		    new PhoneNumber(number),
     		    "Sample Twilio SMS using Java")
     		.create();
-     		   return "Heelo Dada";
+     		   return "Hello SMS";
  		  } catch (Exception e) {
  		   	   return "Error" ;
  		  }
